@@ -1,16 +1,21 @@
 package com.wolf.euchre;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Player {
 	public ArrayList<Card> hand;
 	private int[] suits;
 	public int tricks;
+	public boolean madeIt;
 	
 	public Player(){
 		hand = new ArrayList<Card>();
-		suits = new int[4];
-		
+		suits = new int[4];	
+	}
+	
+	public void sortHand(){
+		Collections.sort(hand);
 	}
 	
 	public ArrayList<Card> getHand(){
@@ -19,7 +24,6 @@ public class Player {
 	
 	public void addCard(Card c){
 		hand.add(c);
-	
 	}
 	
 	public Card playCard(int i){
@@ -84,9 +88,10 @@ public class Player {
 			return -1;	
 		}
 	}
-	
-	public int call(boolean dealer){
-		return -1;
+
+	public Card play(int i){
+		Card c = hand.remove(0);
+		return c;
 	}
 	
 	public boolean discard(){

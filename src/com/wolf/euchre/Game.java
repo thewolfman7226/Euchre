@@ -19,14 +19,20 @@ public class Game {
 		redScore = 0;
 		blackScore = 0;
 		Random g = new Random();
-		dealer = g.nextInt()%4;
+		dealer = g.nextInt(3);
 		lead = (dealer+1)%4;
 		players = new Player[4];
-		for(Player p: players){
-			p = new Player();
-		}
+		players[0] = new Player();
+		players[1] = new Player();
+		players[2] = new Player();
+		players[3] = new Player();
+// 		for(Player p: players){
+// 			p = new Player();
+// 			
+// 		}
 		upCard = null;
 		deal(dealer);
+		sort();
 	}
 	
 	public void deal(int d){
@@ -57,7 +63,10 @@ public class Game {
 		trump = t;
 	}
 	
-	
-		
-	
+	private void sort(){
+	    players[0].sortHand();
+	    players[1].sortHand();
+	    players[2].sortHand();
+	    players[3].sortHand();
+	}	
 }

@@ -1,0 +1,22 @@
+#BlueJ class context
+comment0.params=
+comment0.target=Player()
+comment1.params=
+comment1.target=void\ sortHand()
+comment2.params=
+comment2.target=java.util.ArrayList\ getHand()
+comment3.params=c
+comment3.target=void\ addCard(Card)
+comment4.params=i
+comment4.target=Card\ playCard(int)
+comment5.params=
+comment5.target=int\ bestSuit()
+comment6.params=upCard\ dealer
+comment6.target=int\ call(Card,\ boolean)
+comment7.params=i
+comment7.target=Card\ play(int)
+comment8.params=
+comment8.target=boolean\ discard()
+comment9.params=
+comment9.target=void\ gotTrick()
+numComments=10

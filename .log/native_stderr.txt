@@ -1,0 +1,1 @@
+ERROR: resource directory '/storage/emulated/0/AppProjects/Euchre/projects//res/' does not exist

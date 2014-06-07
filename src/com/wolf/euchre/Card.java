@@ -1,6 +1,6 @@
 package com.wolf.euchre;
 
-public class Card
+public class Card implements Comparable<Card>
 {
 	private int rank, suit;
 
@@ -25,6 +25,18 @@ public class Card
 
 	public int getSuit() {
 		return suit;
+	}
+
+	public int compareTo(Card c){
+		if(suit < c.suit){
+			return -1; 
+		} else if(suit > c.suit){
+			return 1;
+		} else if(rank > c.rank){
+			return -1;
+		} else  {//if( rank > c.rank){
+			return 1; 
+		}
 	}
 
 }
