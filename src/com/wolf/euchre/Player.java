@@ -5,13 +5,13 @@ import java.util.Collections;
 
 public class Player {
 	public ArrayList<Card> hand;
-	private int[] suits;
+	private int[] suits;  // number of cards in each suit
 	public int tricks;
 	public boolean madeIt;
 	
 	public Player(){
 		hand = new ArrayList<Card>();
-		suits = new int[4];	
+		suits = new int[4];	 
 	}
 	
 	public void sortHand(){
@@ -24,12 +24,27 @@ public class Player {
 	
 	public void addCard(Card c){
 		hand.add(c);
+		suits[c.getSuit()] ++;
+		/** for Ai eventually */
+//		int s = c.getSuit();
+//		int r = c.getRank();
+//		suits[s] = suits[s]+r;
+//		if(r == 2){
+//			suits[s] +=5;
+//			suits[(s+2)%4] += 4;
+//		}
 	}
 	
-	public Card playCard(int i){
-		return hand.get(i);
+	public boolean discard(int i){
+		if(i != 5){
+			hand.remove(i);
+			sortHand();
+			return true;
+		}
+		return false;
 	}
 	
+	/**
 	public int bestSuit(){
 		
 		for(Card c : hand ){
@@ -72,31 +87,40 @@ public class Player {
 		}
 		return j;
 	}
+	*/
 	
-	public int call(Card upCard, boolean dealer){
-		if(dealer){
-			if(upCard.getRank() == 2){
-				suits[upCard.getSuit()] += 5;
-				suits[(upCard.getSuit()+2)%4] += 4;
-			} else {
-				suits[upCard.getSuit()] += upCard.getRank();
-			}
-		}
-		if(suits[upCard.getSuit()]>14){
-			return upCard.getSuit();
-		} else{
-			return -1;	
-		}
-	}
+//	public int call(Card upCard, boolean dealer){
+//		if(dealer){
+//			if(upCard.getRank() == 2){
+//				suits[upCard.getSuit()] += 5;
+//				suits[(upCard.getSuit()+2)%4] += 4;
+//			} else {
+//				suits[upCard.getSuit()] += upCard.getRank();
+//			}
+//		}
+//		if(suits[upCard.getSuit()]>14){
+//			return upCard.getSuit();
+//		} else{
+//			return -1;	
+//		}
+//	}
 
 	public Card play(int i){
-		Card c = hand.remove(0);
+		Card c = hand.remove(i);
 		return c;
 	}
 	
-	public boolean discard(){
-		
-		return true;
+	/** still need to limit cards when jack is played */
+	public Card play(int i, Card c){
+		Card newCard = hand.get(i);
+		if(c.getSuit() == newCard.getSuit()){
+			hand.remove(i);
+			return newCard;
+		} else if(suits[c.getSuit()] == 0){
+			hand.remove(i);			
+			return newCard;
+		}
+		return null;
 	}
 	
 	public void gotTrick(){
