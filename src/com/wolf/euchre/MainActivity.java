@@ -1,8 +1,10 @@
 package com.wolf.euchre;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
+import android.view.View;
 
 public class MainActivity extends Activity {
 
@@ -19,5 +21,14 @@ public class MainActivity extends Activity {
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
-    
+
+    public void newGame(View v){
+        Intent i = new Intent(this, gameGUI.class);
+        startActivity(i);
+    }
+
+    public void settings(View v){
+        Intent i = new Intent(this, settings.class);
+        startActivity(i);
+    }
 }
