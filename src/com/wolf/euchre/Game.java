@@ -33,6 +33,9 @@ public class Game {
 		upCard = null;
 		deal(dealer);
 		sort();
+        if(call()){
+
+        }
 	}
 	
 	public void deal(int d){
@@ -68,5 +71,27 @@ public class Game {
 	    players[1].sortHand();
 	    players[2].sortHand();
 	    players[3].sortHand();
-	}	
+	}
+
+    public boolean call(){
+        boolean called = false;
+        int suit = -1;
+        int caller = -1;
+        int oldSuit = -1;
+        for(int i = 0; i <8; i++) {
+            suit = players[(dealer+i+1)%4].call(upCard);
+            if(suit != -1 || suit != oldSuit) {
+                caller = (dealer + i + 1) % 4;
+                called = true;
+                trump = suit;
+                return;
+            }
+            if(i == 3){
+                oldSuit = upCard.getSuit();
+                upCard = null;
+            }
+
+        }
+        return called;
+    }
 }

@@ -6,12 +6,14 @@ import java.util.Collections;
 public class Player {
 	public ArrayList<Card> hand;
 	private int[] suits;  // number of cards in each suit
-	public int tricks;
+	private boolean[] hasBauer;
+    public int tricks;
 	public boolean madeIt;
 	
 	public Player(){
 		hand = new ArrayList<Card>();
-		suits = new int[4];	 
+		suits = new int[4];
+        hasBauer = new boolean[4]
 	}
 	
 	public void sortHand(){
@@ -25,6 +27,9 @@ public class Player {
 	public void addCard(Card c){
 		hand.add(c);
 		suits[c.getSuit()] ++;
+        if(c.getRank() == 2){
+            hasBauer[c.getSuit()] = true;
+        }
 		/** for Ai eventually */
 //		int s = c.getSuit();
 //		int r = c.getRank();
@@ -104,21 +109,22 @@ public class Player {
 //			return -1;	
 //		}
 //	}
-
-	public Card play(int i){
-		Card c = hand.remove(i);
-		return c;
-	}
 	
 	/** still need to limit cards when jack is played */
 	public Card play(int i, Card c){
 		Card newCard = hand.get(i);
-		if(c.getSuit() == newCard.getSuit()){
+        if(c == null){
+            hand.remove(i);
+            suits[newCard.getSuit()] --;
+            return newCard;
+        } else if(c.getSuit() == newCard.getSuit()){
 			hand.remove(i);
+            suits[newCard.getSuit()] --;
 			return newCard;
 		} else if(suits[c.getSuit()] == 0){
-			hand.remove(i);			
-			return newCard;
+			hand.remove(i);
+            suits[newCard.getSuit()] --;
+            return newCard;
 		}
 		return null;
 	}
